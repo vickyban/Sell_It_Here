@@ -1,0 +1,163 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+  <link href="homeStyle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div id="header">
+    <div id="logo_div">
+      <img src="logo.png" alt="logo icon" />
+    </div>
+    <div id="search_div">
+      <form action="Search">
+        <div id="box1">
+          <input type="text" name="input" placeholder="search..." />
+          <input type="submit" value="Search" />
+        </div>
+        <div id="box2">
+          <div id="category">
+            <div>Category:</div>
+            <select name="category">
+              <option value="car">Cars</option>
+              <option value="tech">Tech</option>
+              <option value="motor">Motors</option>
+              <option value="leisure">Leisure</option>
+              <option value="home">Home</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="fashion">Fashion</option>
+              <option value="child">Other</option>
+            </select>
+          </div>
+          <div id="price">
+            <div>Price:</div>
+            <div class="dropdown_div">
+              <input type="number" name="minPrice" min="0" placeholder="Price" />
+              <div>to</div>
+              <input type="number" name="maxPrice" min="0" placeholder="Price" />
+            </div>
+          </div>
+          <div id="sort">
+            <div>Sort by:</div>
+            <select name="sort">
+              <option value="date">Date(most recent)</option>
+              <option value="low">Price: low to high</option>
+              <option value="high">Price: high to low</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="login_out">
+
+      <a href="Login" id="login_link">Sign in/Sign up</a>
+      <!-- <div id="login_state">
+        <button id="toggle_btn">${user.name}<i class="fa fa-chevron-down"> </i></button>
+        <ul id="user_div">
+          <li><a href="#"> Your profile</a></li>
+          <li><a href="#">Sell items</a></li>
+          <li id="signout"><a href="#">Sign out</a></li>
+        </ul>
+      </div> -->
+    </div>
+  </div>
+
+  <div id="content" class="center">
+    <a href="Product?id=${item.id}" class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </a>
+
+    <div class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div>
+        <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
+      </div>
+      <div>
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isOn = false;
+    let user_div = document.getElementById("user_div");
+    document.getElementById("toggle_btn").addEventListener("click", e => {
+      if (isOn) {
+        user_div.style.display = 'none';
+        isOn = false;
+      } else {
+        user_div.style.display = 'block';
+        isOn = true;
+        e.stopPropagation();
+      }
+    })
+    document.addEventListener('click', e => {
+      if (isOn) {
+        user_div.style.display = 'none';
+        isOn = false;
+      }
+    })
+  </script>
+</body>
+
+</html>
