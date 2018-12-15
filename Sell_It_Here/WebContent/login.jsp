@@ -8,14 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="Login" method="post">
-		<input type="hidden" name="redirect_uri" value=<c:out value="${uri}" default="${pageContext.request.contextPath}" /> />
-		<input type="text" name="email" placeholder="Email..."/><br>
-		<input type="text" name="password" placeholder="Password..." /><br>
-		<input type="submit" value="Login" />
-	</form>
-	
-	<form action="Signup" method="post">
+	<form action="signin" method="post">
 		<input type="hidden" name="redirect_uri" value=<c:out value="${uri}" default="${pageContext.request.contextPath}" /> />
 		<input type="text" name="email" placeholder="Email..."/><br>
 		<input type="text" name="password" placeholder="Password..." /><br>

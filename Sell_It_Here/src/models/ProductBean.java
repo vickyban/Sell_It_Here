@@ -1,17 +1,18 @@
 package models;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class Product implements Serializable {
+public class ProductBean implements Serializable {
 	private int productId;
 	private int sellerId;
 	private String name;
 	private double price;
 	private String category;
 	private String description;
-	private Date created_at;
-	private Date updated_at;
+	private Timestamp created_at;
+	private Timestamp updated_at;
 	private boolean sold;
 	
 	public int getProductId() {
@@ -50,16 +51,16 @@ public class Product implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getCreated_at() {
+	public Timestamp getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
 	}
-	public Date getUpdated_at() {
+	public Timestamp getUpdated_at() {
 		return updated_at;
 	}
-	public void setUpdated_at(Date updated_at) {
+	public void setUpdated_at(Timestamp updated_at) {
 		this.updated_at = updated_at;
 	}
 	public boolean isSold() {
@@ -69,7 +70,20 @@ public class Product implements Serializable {
 		this.sold = sold;
 	}
 	
-	
+	@Override 
+	public String toString() {
+		return "User{\n"
+				+ "product_id: " + productId + "\n"
+				+ "seller_id: " + sellerId + "\n"
+				+ "name: " + name + "\n"
+				+ "price: " + price + "\n"
+				+ "description: " + description + "\n"
+				+ "category: " + category + "\n"
+				+ "is_sold: " + sold + "\n"
+				+ "created_at: " + created_at.toString() + "\n"
+				+ "updated_at: " + updated_at.toString() + "\n"
+				+ "}\n";
+	}
 	
 	
 }

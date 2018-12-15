@@ -1,63 +1,104 @@
+import java.util.ArrayList;
 import java.util.Date;
 
-import dao.UserDao;
-import models.Product;
-import models.User;
+import dao.ProductDAO;
+import dao.UserDAO;
+import dao.UserDAO_OLD;
+import models.ProductBean;
+import models.UserBean;
 import util.HashPassword;
+import util.SortBy;
 public class Test {
 
 	public static void main(String[] args) {
-		String salt = HashPassword.getSalt();
-		String password = "Poyo";
-		String hash = HashPassword.getHashPassword(password, salt);
+		String[] usernames = {"kim", "kevin", "michael", "michelle", "lisa", "ashley", "tom", "tim", "jessie", "jane", "jake", "andrew"};
+		String[] city = {"Toronto", "Mississauga","Brampton", "Oakville", "Waterloo"};
+		String[] category = {"car","toy", "garden", "fashion", "motor","sport"};
+		String[] names = {"Animal ", "Honda ", "Canadian Tire ", "Zera ", "Dress ", "clock ", "watch ", "engine "};
+		Double[] prices = {12.15,2000.0,230.34,12.0, 7.88, 5.99,60.3,80.99,405.3};
 		
-//		User user = new User();
-//		user.setUsername("Poyo");
-//		user.setPassword(hash);
-//		user.setSalt(salt);
-//		user.setLocation("Mississauga");
-//		user.setEmail("poyo@example.com");
+		ArrayList<UserBean> users = new ArrayList<>();
+		for(String u : usernames) {
+			UserBean bean = new UserBean();
+			bean.setFname(u);
+			bean.setLname("Smith");
+			bean.setUsername(u);
+			bean.hashPassword("1234");
+			bean.setEmail(u + "@example.com");
+			bean.setStreet("12");
+			bean.setCity( city[ (int)(Math.random() * city.length ) ] );
+			bean.setDob(new Date());
+			bean.setProvince("Ontario");
+			bean.setPostal("l4t2y4");
+			bean.setPhone("123 990 1002");
+			bean.setDateCreated( new java.sql.Timestamp(new Date().getTime()) );
+			
+			users.add(UserDAO.createUser(bean));
+		}
+		
+		for(UserBean bean : users) {
+			int n = (int)(Math.random() * 10 + 1);
+			for(int i = 0; i < n; i++) {
+				String type = category[ (int)(Math.random() * category.length ) ];
+				
+				ProductBean product = new ProductBean();
+				product.setSellerId(bean.getId());
+				product.setName( names[ (int)(Math.random() * names.length ) ] + type);
+				product.setPrice(prices[ (int)(Math.random() * prices.length ) ]);
+				product.setCategory(type);
+				product.setDescription("For dog only. KEEP OUT OF CHILDREN REACH");
+				
+				ProductDAO.createProduct(product);
+			}
+		}
+		
 //		
-//		user = UserDao.createUser(user);
-//		System.out.println("New user");
-//		System.out.println(user);
 //		
-//		User user2 = UserDao.getUserByEmail("poyo@example.com");
-//		System.out.println("Get by email");
-//		System.out.println(user2);
+//		// testing Product model
+//		ProductBean product = new ProductBean();
+//		UserBean user = UserDAO_OLD.getUserByEmail("poyo@example.com");
+//		product.setSellerId(user.getUserId());
+//		product.setName("Dog toy");
+//		product.setPrice(12.99);
+//		product.setCategory("Toy");
+//		product.setDescription("For dog only. KEEP OUT OF CHILDREN REACH");
 //		
-//		user2.setLocation("Toronto");
-//		user2 = UserDao.updateUser(user2);
-//		System.out.println("Update user");
-//		System.out.println(user2);
+//		System.out.println("insert into DB");
+//		product = ProductDAO.createProduct(product);
 //		
-//		salt = HashPassword.getSalt();
-//		hash = HashPassword.getHashPassword("Poyo2", salt);
-//		user2.setPassword(hash);
-//		user2.setSalt(salt);
-//		user2 = UserDao.updatePassword(user2);
-//		System.out.println("Update password");
-//		System.out.println(user2);
+//		ProductBean product2 = new ProductBean();
+//		product2.setSellerId(UserDAO_OLD.getUserByEmail("poyo@example.com").getUserId());
+//		product2.setName("Cat toy");
+//		product2.setPrice(10.99);
+//		product2.setCategory("Toy");
+//		product2.setDescription("For cat only. KEEP OUT OF CHILDREN REACH");
+//		
+//		System.out.println("2nd insert into DB");
+//		product2 = ProductDAO.createProduct(product2);
+//		
+//		System.out.println("search product");
+//		ArrayList<ProductBean> products = ProductDAO.getFilteredProducts("Toronto", "Toy", "", 0, 30, SortBy.HIGH_LOW);
+//		System.out.println("here product");
+//		if(products != null || !products.isEmpty()) {
+//			for(ProductBean p : products) {
+//				System.out.println(p.toString());
+//			}
+//				
+//		}
+			
 		
-//		private int productId;
-//		private int sellerId;
-//		private String name;
-//		private double price;
-//		private String category;
-//		private String description;
-//		private Date created_at;
-//		private Date updated_at;
-//		private boolean sold;
-		
-		// testing Product model
-		Product product = new Product();
-		product.setSellerId(UserDao.getUserByEmail("poyo@example.com").getUserId());
-		product.setName("Dog toy");
-		product.setPrice(12.99);
-		product.setCategory("Toy");
-		product.setDescription("For dog only. KEEP OUT OF CHILDREN REACH");
-		
-		
+//		
+//		System.out.println("Update product");
+//		ProductDao.setSoldProduct(product.getProductId());
+//		System.out.println(product);
+//		
+//		System.out.println("Get recent posts");
+//		products = ProductDao.getRecentPosts();
+//		if(products != null || !products.isEmpty()) {
+//			for(Product p : products) {
+//				System.out.println(p.toString());
+//			}
+//		}
 	
 	}
 

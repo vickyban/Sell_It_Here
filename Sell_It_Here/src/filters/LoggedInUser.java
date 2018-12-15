@@ -30,7 +30,7 @@ public class LoggedInUser implements Filter {
 			System.out.println("no session ");
 			System.out.println(((HttpServletRequest)request).getRequestURI());
 			request.setAttribute("uri",((HttpServletRequest)request).getRequestURI());
-			request.getRequestDispatcher("/Login").forward(request, response);
+			request.getRequestDispatcher("/signin").forward(request, response);
 		}else {
 			System.out.println("yes session ");
 			chain.doFilter(request, response);

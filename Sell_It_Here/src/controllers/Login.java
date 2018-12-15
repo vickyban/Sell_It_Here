@@ -8,13 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDao;
-import models.User;
+import dao.UserDAO;
+import models.UserBean;
 
-/**
- * Servlet implementation class Login
- */
-@WebServlet("/Login")
+//@WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,8 +21,13 @@ public class Login extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("in login servlet. uri is " + request.getAttribute("uri"));
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		String action = request.getParameter("action");
+		if(action != null && action.equalsIgnoreCase("delete")) {
+			doDelete(request,response);
+		}else {
+			System.out.println("in login servlet. uri is " + request.getAttribute("uri"));
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		}
 	}
 
 
@@ -34,16 +36,23 @@ public class Login extends HttpServlet {
 		String password =  request.getParameter("password").trim();
 		String uri = request.getParameter("redirect_uri");
 		
-		User user = UserDao.getUserByEmail(email);
+		UserBean user = UserDAO.getUserByEmail(email);
+		System.out.println("Post login");
 		if(user != null && user.authenticate(password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			response.sendRedirect(uri);
 		}else {
 			request.setAttribute("uri", uri);
-			request.setAttribute("msg", "invalid email or password!!!");
+			request.setAttribute("messages", "invalid email or password!!!");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
+	}
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getSession().invalidate();
+		resp.sendRedirect(req.getContextPath());
 	}
 
 }

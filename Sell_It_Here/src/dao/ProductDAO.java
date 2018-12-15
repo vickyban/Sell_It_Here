@@ -1,7 +1,7 @@
 package dao;
 
-import models.Product;
-import models.User;
+import models.ProductBean;
+import models.UserBean;
 import util.SortBy;
 
 import java.sql.Timestamp;
@@ -12,14 +12,14 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class ProductDao {
+public class ProductDAO {
 	// Create new product 
-	public static Product createProduct(Product product) {
+	public static ProductBean createProduct(ProductBean product) {
 		Connection conn = null;
 		try {
 			conn = DB.getConnection();
 			String query = "INSERT INTO Products "
-					+ "(seller_id, name, price, category, description, is_sold, created_at, updated_at) "
+					+ "(sellerID, name, price, category, description, is_sold, created_at, updated_at) "
 					+ "VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, product.getSellerId());
@@ -29,13 +29,13 @@ public class ProductDao {
 			stmt.setString(5, product.getDescription());
 			stmt.setBoolean(6, product.isSold());
 			java.util.Date now = new java.util.Date();
-			stmt.setDate(7, new java.sql.Date(now.getTime()));
-			stmt.setDate(8, new java.sql.Date(now.getTime()));
+			stmt.setTimestamp(7, new Timestamp(now.getTime()));
+			stmt.setTimestamp(8, new Timestamp(now.getTime()));
 			
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			if(rs.next()) {
-				product = getProductById(product.getProductId());
+				product = getProductById(rs.getInt(1));
 			}
 			
 		}catch(SQLException e) {
@@ -47,27 +47,27 @@ public class ProductDao {
 	}
 	
 	// Read record by productID
-	public static Product getProductById(int id) {
+	public static ProductBean getProductById(int id) {
 		Connection con = null;
-		Product product = null;
+		ProductBean product = null;
 		try{
 			con = DB.getConnection();
-			String query = "Select * from Products where product_id=? ";
+			String query = "Select * from Products where productID=? ";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setInt(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				product = new Product();
-				product.setProductId(rs.getInt("product_id"));
-				product.setSellerId(rs.getInt("seller_id"));
+				product = new ProductBean();
+				product.setProductId(rs.getInt("productID"));
+				product.setSellerId(rs.getInt("sellerID"));
 				product.setName(rs.getString("name"));
 				product.setPrice(rs.getDouble("price"));
 				product.setCategory(rs.getString("category"));
 				product.setDescription(rs.getString("description"));
 				product.setSold(rs.getBoolean("is_sold"));
-				product.setCreated_at(rs.getDate("created_at"));
-				product.setUpdated_at(rs.getDate("updated_at"));
+				product.setCreated_at(rs.getTimestamp("created_at"));
+				product.setUpdated_at(rs.getTimestamp("updated_at"));
 			}
 			
 		}catch(SQLException e) {
@@ -75,43 +75,45 @@ public class ProductDao {
 		}finally {
 			DB.closeConnection(con);
 		}
+		System.out.println("return by id" + product.toString());
 		return product;
 	}
 	
 	// Return list of Products from the SE
-		public static ArrayList<Product> getFilteredProducts(String location, String category, String search, double pmin, double pmax, SortBy sort) {
+		public static ArrayList<ProductBean> getFilteredProducts(String location, String category, String search, double pmin, double pmax, SortBy sort) {
 			Connection con = null;
-			ArrayList<Product> list = null;
+			ArrayList<ProductBean> list = null;
 			try{
 				con = DB.getConnection();
 				String query = "Select * from Products where "
 						+ "category=? AND "
 						+ "is_sold IS FALSE AND "
 						+ "name LIKE ? AND "
-						+ "seller_id IN (SELECT * FROM Users WHERE location = ?) "
+						+ "sellerID IN (SELECT userID FROM Users WHERE city = ?) AND "
 						+ "price BETWEEN ? AND ? "
 						+ "ORDER BY " + sort.getValue();
+				System.out.println(query);
 				PreparedStatement stmt = con.prepareStatement(query);
 				stmt.setString(1, category);
-				stmt.setString(2, location);
-				stmt.setString(3,"%" + search + "%");
+				stmt.setString(2,"%" + search + "%");
+				stmt.setString(3, location);
 				stmt.setDouble(4, pmin);
 				stmt.setDouble(5, pmax);
 				
 				ResultSet rs = stmt.executeQuery();
 				list = new ArrayList<>();
 				while(rs.next()) {
-					Product product = new Product();
-					product.setProductId(rs.getInt("product_id"));
-					product.setSellerId(rs.getInt("seller_id"));
+					ProductBean product = new ProductBean();
+					product.setProductId(rs.getInt("productID"));
+					product.setSellerId(rs.getInt("sellerID"));
 					product.setName(rs.getString("name"));
 					product.setPrice(rs.getDouble("price"));
 					product.setCategory(rs.getString("category"));
 					product.setDescription(rs.getString("description"));
 					product.setSold(rs.getBoolean("is_sold"));
-					product.setCreated_at(rs.getDate("created_at"));
-					product.setUpdated_at(rs.getDate("updated_at"));
-					
+					product.setCreated_at(rs.getTimestamp("created_at"));
+					product.setUpdated_at(rs.getTimestamp("updated_at"));
+		
 					list.add(product);
 				}			
 			}catch(SQLException e) {
@@ -123,15 +125,19 @@ public class ProductDao {
 			return list;
 		}
 		
+		public static ArrayList<ProductBean> getFilteredProducts(String location, String category){
+			return getFilteredProducts(location, category, "", 0, 5000, SortBy.NEW_OLD);
+		}
+		
 		// Return list of products that a user is SELLING 
-		public static ArrayList<Product> getActiveProducts(int userId){
+		public static ArrayList<ProductBean> getActiveProducts(int userId){
 			Connection con = null;
-			ArrayList<Product> list = null;
+			ArrayList<ProductBean> list = null;
 			try{
 				con = DB.getConnection();
 				String query = "Select * from Products where "
 						+ "is_sold IS FALSE AND "
-						+ "seller_id =? "
+						+ "sellerID =? "
 						+ "ORDER BY " + SortBy.NEW_OLD.getValue();
 				PreparedStatement stmt = con.prepareStatement(query);
 				stmt.setInt(1, userId);
@@ -139,16 +145,16 @@ public class ProductDao {
 				ResultSet rs = stmt.executeQuery();
 				list = new ArrayList<>();
 				while(rs.next()) {
-					Product product = new Product();
-					product.setProductId(rs.getInt("product_id"));
-					product.setSellerId(rs.getInt("seller_id"));
+					ProductBean product = new ProductBean();
+					product.setProductId(rs.getInt("productID"));
+					product.setSellerId(rs.getInt("sellerID"));
 					product.setName(rs.getString("name"));
 					product.setPrice(rs.getDouble("price"));
 					product.setCategory(rs.getString("category"));
 					product.setDescription(rs.getString("description"));
 					product.setSold(rs.getBoolean("is_sold"));
-					product.setCreated_at(rs.getDate("created_at"));
-					product.setUpdated_at(rs.getDate("updated_at"));
+					product.setCreated_at(rs.getTimestamp("created_at"));
+					product.setUpdated_at(rs.getTimestamp("updated_at"));
 					
 					list.add(product);
 				}			
@@ -160,9 +166,9 @@ public class ProductDao {
 			return list;
 		}
 		
-		public static ArrayList<Product> getRecentPosts(){
+		public static ArrayList<ProductBean> getRecentPosts(){
 			Connection con = null;
-			ArrayList<Product> list = null;
+			ArrayList<ProductBean> list = null;
 			try{
 				con = DB.getConnection();
 				String query = "Select * from Products where "
@@ -173,18 +179,19 @@ public class ProductDao {
 				PreparedStatement stmt = con.prepareStatement(query);
 				
 				ResultSet rs = stmt.executeQuery();
+				
 				list = new ArrayList<>();
 				while(rs.next()) {
-					Product product = new Product();
-					product.setProductId(rs.getInt("product_id"));
-					product.setSellerId(rs.getInt("seller_id"));
+					ProductBean product = new ProductBean();
+					product.setProductId(rs.getInt("productID"));
+					product.setSellerId(rs.getInt("sellerID"));
 					product.setName(rs.getString("name"));
 					product.setPrice(rs.getDouble("price"));
 					product.setCategory(rs.getString("category"));
 					product.setDescription(rs.getString("description"));
 					product.setSold(rs.getBoolean("is_sold"));
-					product.setCreated_at(rs.getDate("created_at"));
-					product.setUpdated_at(rs.getDate("updated_at"));
+					product.setCreated_at(rs.getTimestamp("created_at"));
+					product.setUpdated_at(rs.getTimestamp("updated_at"));
 					
 					list.add(product);
 				}			
@@ -193,12 +200,12 @@ public class ProductDao {
 			}finally {
 				DB.closeConnection(con);
 			}
-			System.out.println("size " +list.size());
+//			/System.out.println("size " +list.size());
 			return list;
 		}
 		
 		// Update Product info for SELL
-		public static Product updateProduct(Product product) {
+		public static ProductBean updateProduct(ProductBean product) {
 			Connection conn = null;
 			try {
 				conn = DB.getConnection();
@@ -208,14 +215,14 @@ public class ProductDao {
 						+ "category=?, "
 						+ "description=?, "
 						+ "updated_at=? "
-						+ "WHERE product_id=? AND is_sold IS FALSE";
+						+ "WHERE productID=? AND is_sold IS FALSE";
 				PreparedStatement stmt = conn.prepareStatement(query);
 				stmt.setString(1,product.getName());
 				stmt.setDouble(2, product.getPrice());
 				stmt.setString(3, product.getCategory());
 				stmt.setString(4, product.getDescription());
 				java.util.Date now = new java.util.Date();
-				stmt.setDate(5, new java.sql.Date(now.getTime()));
+				stmt.setTimestamp(5, new Timestamp(now.getTime()));
 				stmt.setInt(6, product.getProductId());
 				
 				int status = stmt.executeUpdate();
@@ -240,10 +247,10 @@ public class ProductDao {
 				String query = "UPDATE Products SET "
 						+ "is_sold = TRUE, "
 						+ "updated_at=? "
-						+ "WHERE product_id=? AND is_sold IS FALSE";
+						+ "WHERE productID=? AND is_sold IS FALSE";
 				PreparedStatement stmt = conn.prepareStatement(query);
 				java.util.Date now = new java.util.Date();
-				stmt.setDate(1, new java.sql.Date(now.getTime()));
+				stmt.setTimestamp(1, new Timestamp(now.getTime()));
 				stmt.setInt(2, productId);
 				
 				status = stmt.executeUpdate();
@@ -263,7 +270,7 @@ public class ProductDao {
 			try {
 				conn = DB.getConnection();
 				String query = "DELETE Products SET "
-						+ "WHERE product_id=? AND is_sold IS FALSE";
+						+ "WHERE productID=? AND is_sold IS FALSE";
 				PreparedStatement stmt = conn.prepareStatement(query);
 				stmt.setInt(1, productId);
 				

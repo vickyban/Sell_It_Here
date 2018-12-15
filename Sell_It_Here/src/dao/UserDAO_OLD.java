@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.Timestamp;
 
-import models.User;
+import models.UserBean;
 
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -10,9 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class UserDao {
+public class UserDAO_OLD {
 	// Create new User 
-	public static User createUser(User user) {
+	public static UserBean createUser(UserBean user) {
 		Connection con = null;
 		try {
 			con = DB.getConnection();
@@ -46,9 +46,9 @@ public class UserDao {
 	}
 	
 	// Retrieve User's info
-	public static User getUserById(int id) {
+	public static UserBean getUserById(int id) {
 		Connection con = null;
-		User user = null;
+		UserBean user = null;
 		try{
 			con = DB.getConnection();
 			String query = "Select * from Users where user_id=? ";
@@ -57,7 +57,7 @@ public class UserDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-				user = new User();
+				user = new UserBean();
 				user.setUserId(rs.getInt("user_id"));
 				user.setPassword(rs.getString("password"));
 				user.setSalt(rs.getString("salt"));
@@ -78,9 +78,9 @@ public class UserDao {
 	}
 	
 	// Search user by EMAIL for LOGIN VALIDATION PURPOSE
-		public static User getUserByEmail(String email) {
+		public static UserBean getUserByEmail(String email) {
 			Connection con = null;
-			User user = null;
+			UserBean user = null;
 			try{
 				con = DB.getConnection();
 				String query = "Select * from Users where email=? ";
@@ -89,7 +89,7 @@ public class UserDao {
 				
 				ResultSet rs = stmt.executeQuery();
 				if(rs.next()) {
-					user = new User();
+					user = new UserBean();
 					user.setUserId(rs.getInt("user_id"));
 					user.setPassword(rs.getString("password"));
 					user.setSalt(rs.getString("salt"));
@@ -105,12 +105,13 @@ public class UserDao {
 			}finally {
 				DB.closeConnection(con);
 			}
+//			System.out.println(user);
 			return user;
 		}
 	
 	
 	// user update profile info EXCEPT PASSWORD and CREDIT POINT
-	public static User updateUser(User user) {
+	public static UserBean updateUser(UserBean user) {
 		Connection con = null;
 		try {
 			con = DB.getConnection();
@@ -141,7 +142,7 @@ public class UserDao {
 	}
 	
 	// Update PASSWORD 
-	public static User updatePassword(User user) {
+	public static UserBean updatePassword(UserBean user) {
 		Connection con = null;
 		try {
 			con = DB.getConnection();
@@ -168,7 +169,7 @@ public class UserDao {
 		return user;
 	}
 	
-	public static int deleteUser(User user) {
+	public static int deleteUser(UserBean user) {
 		int status = 0;
 		Connection con = null;
 		try {

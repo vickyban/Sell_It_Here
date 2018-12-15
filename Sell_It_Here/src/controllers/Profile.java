@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UserDao;
-import models.User;
+import dao.UserDAO_OLD;
+import models.UserBean;
 
 /**
  * Servlet implementation class Profile
@@ -29,11 +29,11 @@ public class Profile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String location = request.getParameter("location");
-		User user = (User)request.getSession().getAttribute("user");
+		UserBean user = (UserBean)request.getSession().getAttribute("user");
 		user.setUsername(username);
 		user.setLocation(location);
 		
-		user = UserDao.updateUser(user);
+		user = UserDAO_OLD.updateUser(user);
 		System.out.println("Got inside profile servlet retrive user");
 		if(user != null) {
 			System.out.println("Got inside profile servlet ");

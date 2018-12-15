@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ProductDao;
-import models.Product;
+import dao.ProductDAO;
+import models.ProductBean;
 
 /**
  * Servlet implementation class Home
@@ -24,7 +24,7 @@ public class Home extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Product> products = ProductDao.getRecentPosts();
+		ArrayList<ProductBean> products = ProductDAO.getRecentPosts();
 		request.setAttribute("products", products);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
