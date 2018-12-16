@@ -59,21 +59,10 @@ public class RegisterUser extends HttpServlet {
 				String lname = request.getParameter("lname");
 				createUser.setLname(lname);
 				
-
 				
 				String password = request.getParameter("password");
 				createUser.hashPassword(password);
 				
-				String dobMonth = request.getParameter("month");
-				String dobDay = request.getParameter("day");
-				String dobYear = request.getParameter("year");
-				String dob1 = dobDay + "/" + dobMonth + "/" + dobYear;
-				try {
-					Date dob = new SimpleDateFormat("dd/MM/yyyy").parse(dob1);
-					createUser.setDob(dob);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
 				
 				String street = request.getParameter("street");
 				createUser.setStreet(street);
@@ -101,7 +90,7 @@ public class RegisterUser extends HttpServlet {
 				session.setAttribute("user", createUser);
 				
 				System.out.println("Complete!");
-				response.sendRedirect("/");
+				response.sendRedirect("");
 			} else {
 				messages.add("Username already taken");
 				System.out.println("Username already used");

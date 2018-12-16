@@ -16,8 +16,8 @@ public class UserDAO {
 		Connection conn = null;
 		try {
 			conn = dbConnection.getConnection();
-			String query= "Insert into users (firstname,lastname,username,salt,password,email,dob,street,city,province,postal,"
-					+ "phone,date_created) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query= "Insert into users (firstname,lastname,username,salt,password,email,street,city,province,postal,"
+					+ "phone,date_created) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		
 			pstmt.setString(1, user.getFname());
@@ -26,13 +26,12 @@ public class UserDAO {
 			pstmt.setString(4, user.getSalt());
 			pstmt.setString(5, user.getPassword());
 			pstmt.setString(6, user.getEmail());
-			pstmt.setDate(7, new java.sql.Date(user.getDob().getTime()));
-			pstmt.setString(8, user.getStreet());
-			pstmt.setString(9, user.getCity());
-			pstmt.setString(10, user.getProvince());
-			pstmt.setString(11, user.getPostal());
-			pstmt.setString(12, user.getPhone());
-			pstmt.setTimestamp(13, user.getDateCreated());
+			pstmt.setString(7, user.getStreet());
+			pstmt.setString(8, user.getCity());
+			pstmt.setString(9, user.getProvince());
+			pstmt.setString(10, user.getPostal());
+			pstmt.setString(11, user.getPhone());
+			pstmt.setTimestamp(12, user.getDateCreated());
 			
 			pstmt.executeUpdate();
 			
@@ -115,7 +114,6 @@ public class UserDAO {
 				user.setSalt( rs.getString("salt"));
 				user.setPassword( rs.getString("password"));
 				user.setEmail( rs.getString("email"));
-				user.setDob(rs.getDate("dob"));
 				user.setStreet( rs.getString("street"));
 				user.setCity( rs.getString("city"));
 				user.setProvince( rs.getString("province"));
@@ -152,7 +150,6 @@ public class UserDAO {
 						user.setSalt( rs.getString("salt"));
 						user.setPassword( rs.getString("password"));
 						user.setEmail( rs.getString("email"));
-						user.setDob(rs.getDate("dob"));
 						user.setStreet( rs.getString("street"));
 						user.setCity( rs.getString("city"));
 						user.setProvince( rs.getString("province"));
@@ -166,6 +163,47 @@ public class UserDAO {
 					DB.closeConnection(con);
 				}
 //				System.out.println(user);
+				return user;
+			}
+			
+			// user update profile info EXCEPT PASSWORD and CREDIT POINT
+			public static UserBean updateUser(UserBean user) {
+				Connection con = null;
+				try {
+					con = DB.getConnection();
+					String query = "UPDATE Users SET "
+							+ "firstname=?, "
+							+ "lastname=?, "
+							+ "username=?,"
+							+ "email=?,"
+							+ "street=?,"
+							+ "city=?, "
+							+ "postal=?, "
+							+ "province=?, "
+							+ "firstname=?, "
+							+ "updated_at=? "
+							+ "WHERE user_id=?";
+					PreparedStatement pstmt = con.prepareStatement(query);
+					pstmt.setString(1, user.getFname());
+					pstmt.setString(2, user.getLname());
+					pstmt.setString(3, user.getUsername());
+					pstmt.setString(5, user.getEmail());
+					pstmt.setString(6, user.getStreet());
+					pstmt.setString(7, user.getCity());
+					pstmt.setString(8, user.getProvince());
+					pstmt.setString(9, user.getPostal());
+					pstmt.setString(10, user.getPhone());
+					pstmt.setTimestamp(11, user.getDateCreated());
+					pstmt.executeUpdate();
+					
+					// get the new update record
+					user = getUserById(user.getId());
+					
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}finally {
+					DB.closeConnection(con);
+				}
 				return user;
 			}
 }

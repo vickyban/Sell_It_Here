@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDAO;
 import dao.UserDAO_OLD;
 import models.UserBean;
 
@@ -23,21 +24,22 @@ public class Profile extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/userPages/profile.jsp").forward(request,response);
+		request.getRequestDispatcher("/profile.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String location = request.getParameter("location");
-		UserBean user = (UserBean)request.getSession().getAttribute("user");
-		user.setUsername(username);
-		user.setLocation(location);
 		
-		user = UserDAO_OLD.updateUser(user);
+		UserBean user = (UserBean)request.getSession().getAttribute("user");
+		
+		// NEED LOGIC HERE
+		
+		user = UserDAO.updateUser(user);
 		System.out.println("Got inside profile servlet retrive user");
 		if(user != null) {
 			System.out.println("Got inside profile servlet ");
-			request.getRequestDispatcher("/userPages/profile.jsp").forward(request, response);
+			request.getRequestDispatcher("/profile.jsp").forward(request, response);
 		}
 	}
 
