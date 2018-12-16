@@ -46,27 +46,12 @@ a {
 	color: aliceblue;
 }
 
-/* NAVBAR CODE */
-#navBar {
-	height: 40px;
-}
-
-#navBar ol {
-	margin-left: 350px;
-}
-
-.horizontal {
-	display: inline;
-	padding-left: 100px;
-	/*border:1px solid black; */
-}
-
 /* CONTENT CODE */
 /* EDIT PROFILE TABLE */
 #content {
 	width: 70%;
+	min-height: 1000px;
 	margin: 0 auto;
-	margin-top: 10px;
 }
 
 #editTable {
@@ -78,6 +63,41 @@ a {
 	padding-top: 20px;
 	width: 500px;
 }
+
+#signUp{
+	float:left;
+}
+
+#signIn{
+	
+	float:right;
+	margin-right: -50px;
+	margin-top:250px;
+	
+}
+
+#signIn table{
+	border:1px solid black;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#signIn table td{
+	height: 50px;
+}
+
+.textWidth4 {
+	width: 350px;
+	height: 30px;
+	margin-top: 5px;
+	padding-left: 10px;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+
 
 /* EDIT ATTRIBUTES TABLE */
 #editTable2 {
@@ -131,14 +151,28 @@ a {
 	background-color: #e0e0e0;
 }
 
+#createAcc{
+  height: 50px;
+  width: 150px;
+  font-size: 15px;
+  border: 2px solid rgb(255, 63, 85);
+  color: rgb(255, 63, 85);
+  background-color: white;
+}
+
+#createAcc:hover  {
+  background: rgb(255, 63, 85);
+  color: aliceblue;
+}
+
 /* */
 
 #footer{
+	clear:both;
 	width:100%;
 	height:150px;
 	background-color: #eeeeee;
 	border-top:1px solid #dcdcdc;
-	
 }
 
 .footlabel{

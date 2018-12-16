@@ -67,7 +67,7 @@
 								<img
 									src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png">
 							</div>
-							<p class="item_price">${product.price}</p>
+							<p class="item_price">$${product.price}</p>
 							<div class="item_name">${product.name}</div>
 					</a></li>
 

@@ -86,10 +86,10 @@ public class ProductDAO {
 			try{
 				con = DB.getConnection();
 				String query = "Select * from Products where "
-						+ "category=? AND "
+						+ "category like ? AND "
 						+ "is_sold IS FALSE AND "
 						+ "name LIKE ? AND "
-						+ "sellerID IN (SELECT userID FROM Users WHERE city = ?) AND "
+						+ "sellerID IN (SELECT userID FROM Users WHERE city like ?) AND "
 						+ "price BETWEEN ? AND ? "
 						+ "ORDER BY " + sort.getValue();
 				System.out.println(query);

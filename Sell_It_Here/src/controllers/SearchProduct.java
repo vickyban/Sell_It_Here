@@ -36,14 +36,16 @@ public class SearchProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String city = request.getParameter("city");
+		System.out.println("value in city " + city);
 		String category = request.getParameter("category");
 		ArrayList<ProductBean> products = null;
 		
 		if( city == null ) {
-			city = "toronto";
+			city = "%";
 			products = ProductDAO.getFilteredProducts(city, category);
 		}else {
 			String search = request.getParameter("search").trim();
+			System.out.println("search is " + search);
 			double minPrice = Double.parseDouble(request.getParameter("minPrice"));
 			double maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
 			SortBy sort = SortBy.valueOf(request.getParameter("sort"));

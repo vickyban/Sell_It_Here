@@ -14,7 +14,6 @@ public class UserBean implements Serializable {
 	private String salt;
 	private String password;
 	private String email;
-	private Date dob;
 	private String street;
 	private String city;
 	private String province;
@@ -104,14 +103,6 @@ public class UserBean implements Serializable {
 		this.email = email;
 	}
 
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
 	public String getStreet() {
 		return street;
 	}
@@ -171,7 +162,7 @@ public class UserBean implements Serializable {
 	@Override
 	public String toString() {
 		return "UserBean [fname=" + fname + ", lname=" + lname + ", username=" + username + ", password=" + password
-				+ ", email=" + email + ", dob=" + dob + ", street=" + street + ", city=" + city + ", province="
+				+ ", email=" + email + ", street=" + street + ", city=" + city + ", province="
 				+ province + ", postal=" + postal + ", phone=" + phone + ", dateCreated=" + dateCreated + "]";
 	}
 	

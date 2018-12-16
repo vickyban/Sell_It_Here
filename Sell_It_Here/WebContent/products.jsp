@@ -19,7 +19,7 @@
 		</div>
 		<div id="search_div">
 			<form action="${pageContext.request.contextPath}/products">
-				<input type="hidden" name="city"  value=<c:out value="${user.city}" /> />
+				<input type="hidden" name="city"  value='<c:out value="${user.city}" default="%"/>' />
 				<div id="box1">
 					<input type="text" name="search" placeholder="search..." value="${param.search}"/> <input
 						type="submit" value="Search" />
@@ -28,7 +28,7 @@
 					<div id="category">
 						<div>Category:</div>
 						<select name="category">
-							<option value=""  selected="selected">all</option>
+							<option value="%"  selected="selected">all</option>
 							<option value="car">Cars</option>
 							<option value="tech">Tech</option>
 							<option value="motor">Motors</option>

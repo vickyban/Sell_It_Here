@@ -27,7 +27,6 @@ public class Test {
 			bean.setEmail(u + "@example.com");
 			bean.setStreet("12");
 			bean.setCity( city[ (int)(Math.random() * city.length ) ] );
-			bean.setDob(new Date());
 			bean.setProvince("Ontario");
 			bean.setPostal("l4t2y4");
 			bean.setPhone("123 990 1002");

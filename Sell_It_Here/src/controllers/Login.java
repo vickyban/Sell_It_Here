@@ -26,7 +26,7 @@ public class Login extends HttpServlet {
 			doDelete(request,response);
 		}else {
 			System.out.println("in login servlet. uri is " + request.getAttribute("uri"));
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/signup.jsp").forward(request, response);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
 		}else {
 			request.setAttribute("uri", uri);
 			request.setAttribute("messages", "invalid email or password!!!");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/signup.jsp").forward(request, response);
 		}
 	}
 
