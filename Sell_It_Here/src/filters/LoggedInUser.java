@@ -28,8 +28,10 @@ public class LoggedInUser implements Filter {
 		HttpSession session = ((HttpServletRequest)request).getSession(false);
 		if(session == null || session.getAttribute("user") == null) {
 			System.out.println("no session ");
-			System.out.println(((HttpServletRequest)request).getRequestURI());
-			request.setAttribute("uri",((HttpServletRequest)request).getRequestURI());
+			HttpServletRequest req = (HttpServletRequest) request;
+			String uri = req.getRequestURI() + "?" + req.getQueryString();
+			System.out.println("full uri  " +uri);
+			request.setAttribute("uri",uri);
 			request.getRequestDispatcher("/signin").forward(request, response);
 		}else {
 			System.out.println("yes session ");

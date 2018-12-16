@@ -11,14 +11,13 @@
 	<h1>Edit product</h1>
 	<form action="${pageContext.request.contextPath}/products/product" method="post">
 		<input type="hidden" name="action" value='<c:out value="${action}" default="new" />' /> 
-		<input type="hidden" name="id" value="<c:out value="${product.productId}" />" />
-		<input type="text" name="name" placeholder="Product name ..." value="${product.name}" />
-		<input type="number" name="price" value="${product.price}" placeholder="Product price" min=0/>
+		<input type="hidden" name="id" value="<c:out value="${product.productId}" />"  required />
+		<input type="text" name="name" placeholder="Product name ..." value="${product.name}" required/>
+		<input type="number" name="price" value="${product.price}" placeholder="Product price" min=0 step=".01" required/>
 		<div id="category">
 			<div>Category:</div>
 			<select name="category">
-				<option value="%" selected="selected">all</option>
-				<option value="car">Cars</option>
+				<option value="car"  selected="selected">Cars</option>
 				<option value="tech">Tech</option>
 				<option value="motor">Motors</option>
 				<option value="leisure">Leisure</option>
