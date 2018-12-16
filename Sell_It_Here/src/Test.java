@@ -13,7 +13,7 @@ public class Test {
 	public static void main(String[] args) {
 		String[] usernames = {"kim", "kevin", "michael", "michelle", "lisa", "ashley", "tom", "tim", "jessie", "jane", "jake", "andrew"};
 		String[] city = {"Toronto", "Mississauga","Brampton", "Oakville", "Waterloo"};
-		String[] category = {"car","toy", "garden", "fashion", "motor","sport"};
+		String[] category = {"car","electonic","accessory","toy", "garden", "fashion", "motor","sport", "other"};
 		String[] names = {"Animal ", "Honda ", "Canadian Tire ", "Zera ", "Dress ", "clock ", "watch ", "engine "};
 		Double[] prices = {12.15,2000.0,230.34,12.0, 7.88, 5.99,60.3,80.99,405.3};
 		
@@ -36,7 +36,7 @@ public class Test {
 		}
 		
 		for(UserBean bean : users) {
-			int n = (int)(Math.random() * 10 + 1);
+			int n = (int)(Math.random() * 20 + 1);
 			for(int i = 0; i < n; i++) {
 				String type = category[ (int)(Math.random() * category.length ) ];
 				

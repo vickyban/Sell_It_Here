@@ -17,7 +17,7 @@ public class UserDAO {
 		try {
 			conn = dbConnection.getConnection();
 			String query= "Insert into users (firstname,lastname,username,salt,password,email,street,city,province,postal,"
-					+ "phone,date_created) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "phone) values (?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		
 			pstmt.setString(1, user.getFname());
@@ -31,7 +31,6 @@ public class UserDAO {
 			pstmt.setString(9, user.getProvince());
 			pstmt.setString(10, user.getPostal());
 			pstmt.setString(11, user.getPhone());
-			pstmt.setTimestamp(12, user.getDateCreated());
 			
 			pstmt.executeUpdate();
 			
@@ -135,7 +134,7 @@ public class UserDAO {
 				Connection con = null;
 				UserBean user = null;
 				try{
-					con = DB.getConnection();
+					con = dbConnection.getConnection();
 					String query = "Select * from Users where email=? ";
 					PreparedStatement stmt = con.prepareStatement(query);
 					stmt.setString(1, email);
@@ -160,7 +159,7 @@ public class UserDAO {
 				}catch(SQLException e) {
 					e.printStackTrace();
 				}finally {
-					DB.closeConnection(con);
+					dbConnection.closeConnection(con);
 				}
 //				System.out.println(user);
 				return user;
@@ -170,7 +169,7 @@ public class UserDAO {
 			public static UserBean updateUser(UserBean user) {
 				Connection con = null;
 				try {
-					con = DB.getConnection();
+					con = dbConnection.getConnection();
 					String query = "UPDATE Users SET "
 							+ "firstname=?, "
 							+ "lastname=?, "
@@ -180,20 +179,18 @@ public class UserDAO {
 							+ "city=?, "
 							+ "postal=?, "
 							+ "province=?, "
-							+ "firstname=?, "
-							+ "updated_at=? "
-							+ "WHERE user_id=?";
+							+ "phone=? "
+							+ "WHERE userID=?";
 					PreparedStatement pstmt = con.prepareStatement(query);
 					pstmt.setString(1, user.getFname());
 					pstmt.setString(2, user.getLname());
 					pstmt.setString(3, user.getUsername());
-					pstmt.setString(5, user.getEmail());
-					pstmt.setString(6, user.getStreet());
-					pstmt.setString(7, user.getCity());
+					pstmt.setString(4, user.getEmail());
+					pstmt.setString(5, user.getStreet());
+					pstmt.setString(6, user.getCity());
+					pstmt.setString(7, user.getPostal());
 					pstmt.setString(8, user.getProvince());
-					pstmt.setString(9, user.getPostal());
-					pstmt.setString(10, user.getPhone());
-					pstmt.setTimestamp(11, user.getDateCreated());
+					pstmt.setString(9, user.getPhone());
 					pstmt.executeUpdate();
 					
 					// get the new update record
@@ -202,7 +199,7 @@ public class UserDAO {
 				}catch(SQLException e) {
 					e.printStackTrace();
 				}finally {
-					DB.closeConnection(con);
+					dbConnection.closeConnection(con);
 				}
 				return user;
 			}

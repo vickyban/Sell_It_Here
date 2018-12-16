@@ -43,65 +43,45 @@ public class RegisterUser extends HttpServlet {
 		String username = request.getParameter("user");
 		String email = request.getParameter("email");
 		
-		ArrayList<String> messages = new ArrayList<>(); 
+		ArrayList<String> messages = new ArrayList<>();
 		
-		if(UserDAO.isValidEmail(email)) {
-			if(UserDAO.isValidUsername(username)) {
-				UserBean createUser = new UserBean();
-				
-				createUser.setUsername(username);
-				createUser.setEmail(email);
-				
-				
-				String fname = request.getParameter("fname");
-				createUser.setFname(fname);
-				
-				String lname = request.getParameter("lname");
-				createUser.setLname(lname);
-				
-				
-				String password = request.getParameter("password");
-				createUser.hashPassword(password);
-				
-				
-				String street = request.getParameter("street");
-				createUser.setStreet(street);
-				
-				String city = request.getParameter("city");
-				createUser.setCity(city);
-				
-				String province = request.getParameter("province");
-				createUser.setProvince(province);
-				
-				String postal = request.getParameter("postal");
-				createUser.setPostal(postal);
-				
-				String phone = request.getParameter("phone");
-				createUser.setPhone(phone);
-				
-				Calendar calendar = Calendar.getInstance();
-				Date now = calendar.getTime();
-				java.sql.Timestamp dateCreated = new java.sql.Timestamp(now.getTime());
-				createUser.setDateCreated(dateCreated);
-				
-				UserDAO.createUser(createUser);
-				
-				HttpSession session = request.getSession();
-				session.setAttribute("user", createUser);
-				
-				System.out.println("Complete!");
-				response.sendRedirect("");
-			} else {
-				messages.add("Username already taken");
-				System.out.println("Username already used");
-			}
-		} else {
+		boolean valid = true;
+		if(!UserDAO.isValidEmail(email)) {
+			valid = false;
 			messages.add("Email already used");
 			System.out.println("email already taken");
+		}if(!UserDAO.isValidUsername(username)) {
+			valid = false;
+			messages.add("Username already taken");
+			System.out.println("Username already used");
+		}
+		if(valid) {
+			UserBean createUser = new UserBean();
+			
+			createUser.setUsername(username);
+			createUser.setEmail(email);
+
+			createUser.setFname(request.getParameter("fname"));
+			createUser.setLname(request.getParameter("lname"));
+			createUser.hashPassword(request.getParameter("password"));
+			createUser.setStreet(request.getParameter("street"));
+			createUser.setCity(request.getParameter("city"));
+			createUser.setProvince(request.getParameter("province"));
+			createUser.setPostal(request.getParameter("postal"));
+			createUser.setPhone(request.getParameter("phone"));
+			
+			createUser = UserDAO.createUser(createUser);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("user", createUser);
+			
+			System.out.println("Complete!");
+			response.sendRedirect(getServletContext().getContextPath());
+		}else {
+			request.setAttribute("messages", messages);
+			request.getRequestDispatcher("/signup.jsp").forward(request, response);
 		}
 		
-		request.setAttribute("messages", messages);
-		request.getRequestDispatcher("/signup.jsp").forward(request, response);
 	}
 
 }

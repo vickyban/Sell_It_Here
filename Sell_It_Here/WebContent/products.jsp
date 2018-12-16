@@ -28,15 +28,15 @@
 					<div id="category">
 						<div>Category:</div>
 						<select name="category">
-							<option value="%"  selected="selected">all</option>
+							<option value=""  selected="selected">all</option>
 							<option value="car">Cars</option>
-							<option value="tech">Tech</option>
+							<option value="electonic">Electonic</option>
 							<option value="motor">Motors</option>
-							<option value="leisure">Leisure</option>
+							<option value="accessory">Accessories</option>
 							<option value="home">Home</option>
-							<option value="entertainment">Entertainment</option>
+							<option value="sport">Sports</option>
 							<option value="fashion">Fashion</option>
-							<option value="child">Other</option>
+							<option value="other">Other</option>
 						</select>
 					</div>
 					<div id="price">
