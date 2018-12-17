@@ -19,7 +19,7 @@ public class UserBean implements Serializable {
 	private String province;
 	private String postal;
 	private String phone;
-	private int creditcard;
+	private String creditcard;
 	private java.sql.Timestamp dateCreated;
 	
 	
@@ -143,11 +143,13 @@ public class UserBean implements Serializable {
 		this.phone = phone;
 	}
 
-	public int getCreditcard() {
+
+
+	public String getCreditcard() {
 		return creditcard;
 	}
 
-	public void setCreditcard(int creditcard) {
+	public void setCreditcard(String creditcard) {
 		this.creditcard = creditcard;
 	}
 
