@@ -98,7 +98,7 @@ public class UserDAO {
 		Connection con = null;
 		UserBean user = null;
 		try{
-			con = DB.getConnection();
+			con = dbConnection.getConnection();
 			String query = "Select * from Users where userID=? ";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setInt(1, id);
@@ -124,7 +124,7 @@ public class UserDAO {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			DB.closeConnection(con);
+			dbConnection.closeConnection(con);
 		}
 		return user;
 	}
@@ -170,31 +170,32 @@ public class UserDAO {
 				Connection con = null;
 				try {
 					con = dbConnection.getConnection();
-					String query = "UPDATE Users SET "
-							+ "firstname=?, "
-							+ "lastname=?, "
-							+ "username=?,"
-							+ "email=?,"
-							+ "street=?,"
-							+ "city=?, "
-							+ "postal=?, "
-							+ "province=?, "
-							+ "phone=? "
-							+ "WHERE userID=?";
+					String query = "Update users set firstname=?, lastname=?, street =?, city =?, province =?, postal =?, phone =?, email =?,"
+							+ "salt=?, password=?, creditcard = ? where userID = ?";
 					PreparedStatement pstmt = con.prepareStatement(query);
+					
 					pstmt.setString(1, user.getFname());
 					pstmt.setString(2, user.getLname());
-					pstmt.setString(3, user.getUsername());
-					pstmt.setString(4, user.getEmail());
-					pstmt.setString(5, user.getStreet());
-					pstmt.setString(6, user.getCity());
-					pstmt.setString(7, user.getPostal());
-					pstmt.setString(8, user.getProvince());
-					pstmt.setString(9, user.getPhone());
+					pstmt.setString(3, user.getStreet());
+					pstmt.setString(4, user.getCity());
+					pstmt.setString(5, user.getProvince());
+					pstmt.setString(6, user.getPostal());
+					pstmt.setString(7, user.getPhone());
+					pstmt.setString(8, user.getEmail());
+					pstmt.setString(9, user.getSalt());
+					pstmt.setString(10, user.getPassword());
+					pstmt.setString(11, user.getCreditcard());
+					pstmt.setInt(12, user.getId());
+					
+					System.out.println("Im here1");
+					
 					pstmt.executeUpdate();
+					
+					System.out.println("Im here2");
 					
 					// get the new update record
 					user = getUserById(user.getId());
+					
 					
 				}catch(SQLException e) {
 					e.printStackTrace();

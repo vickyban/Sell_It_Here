@@ -80,7 +80,7 @@
 							<div class="item_name">${product.name}</div>
 							<div class="item_price">
 								<div>Price: $${product.price}</div>
-								<div>Seller: ${product.price}</div>
+							<%-- 	<div>Seller: ${product.price}</div> --%>
 							</div>
 					</a></li>
 

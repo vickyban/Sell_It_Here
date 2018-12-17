@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,37 +32,70 @@ public class ProductDetail extends HttpServlet {
 		String requestURI = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("product uri " + requestURI);
 		switch (requestURI) {
-			case "/products/product/edit":
+			case "/products/product/edit":  // ?id=
 				editProduct(request, response);
 				break;
-			case "/products/product":
+			case "/products/product":  //?id=
 				showProduct(request,response);
 				break;
 			case "/products/product/new":
 				newProduct(request,response);
 				break;
+			case "/products/product/delete":  //id=
+				deleteProduct(request,response);
+				break;
+			case "/products/acitve":  //id=
+				activeProduct(request,response);
+				break;
 		}
+	}
+
+	private void activeProduct(HttpServletRequest request, HttpServletResponse response) {
+		UserBean user = (UserBean) request.getSession(false).getAttribute("user");
+		ArrayList<ProductBean> products = ProductDAO.getActiveProducts(user.getId());
+		request.setAttribute("products", products);
+		
+	}
+
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int productID = Integer.parseInt(request.getParameter("id"));
+		int status = ProductDAO.deleteProduct(productID);
+		if(status == 1) {
+			System.out.println("Successfully deleted product id " + productID);
+		}else {
+			System.out.println("Failed to delete product id " + productID);
+		}
+		response.sendRedirect(request.getContextPath());
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-		UserBean seller = (UserBean) request.getSession(false).getAttribute("user");
-		ProductBean product = new ProductBean();
-		product.setName(request.getParameter("name"));
-		product.setSellerId(seller.getId());
-		product.setCategory(request.getParameter("category"));
-		product.setPrice(Double.parseDouble(request.getParameter("price")));
-		product.setDescription(request.getParameter("description"));
 		
-		switch(action) {
-		case "new":
-				product = ProductDAO.createProduct(product); break;
-		case "edit":
-				product.setProductId( Integer.parseInt(request.getParameter("id")));
-				product = ProductDAO.updateProduct(product); break;
+		
+		String action = request.getParameter("action");
+		
+		if(action.equalsIgnoreCase("delete")) {
+			deleteProduct(request,response);
+		}else {
+			UserBean seller = (UserBean) request.getSession(false).getAttribute("user");
+			ProductBean product = new ProductBean();
+			product.setName(request.getParameter("name"));
+			product.setSellerId(seller.getId());
+			product.setCategory(request.getParameter("category"));
+			product.setPrice(Double.parseDouble(request.getParameter("price")));
+			product.setDescription(request.getParameter("description"));
+			
+			switch(action) {
+			case "new":
+					System.out.println("Got in here to create new product");
+					product = ProductDAO.createProduct(product); break;
+			case "edit":
+					product.setProductId( Integer.parseInt(request.getParameter("id")));
+					product = ProductDAO.updateProduct(product); break;
+			}
+			response.sendRedirect(request.getRequestURI() + "?id=" + product.getProductId());
 		}
-		response.sendRedirect(request.getRequestURI() + "?id=" + product.getProductId());
 	}
 
 	

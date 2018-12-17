@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+#navBar {
+	margin-top: -20px;
+	height: 85px;
+	background-color: #eeeeee;
+}
+
+#navBar ol {
+	margin-left: 350px;
+}
+
+.horizontal {
+	padding-left: 50px;
+	display: inline;
+	margin-top: 100px;
+	/*border:1px solid black; */
+}
+
+#center a {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+#center a:hover {
+	border-radius: 5px;
+	background-color: #e0e0e0;
+}
+
+#center {
+	padding-top: 20px;
+	padding-left: 100px;
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+}

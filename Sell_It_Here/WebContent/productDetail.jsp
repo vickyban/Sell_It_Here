@@ -6,6 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/styles/searchbarStyle.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/styles/productDetailStyle.css" rel="stylesheet"
 	type="text/css" />

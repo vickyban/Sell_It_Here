@@ -40,6 +40,7 @@ public class ProductDAO {
 		}finally {
 			dbConnection.closeConnection(conn);
 		}
+		
 		return product;
 	}
 	
@@ -263,8 +264,7 @@ public class ProductDAO {
 			int status = 0;
 			try {
 				conn = dbConnection.getConnection();
-				String query = "DELETE Products SET "
-						+ "WHERE productID=? AND is_sold IS FALSE";
+				String query = "DELETE FROM Products WHERE productID=? AND is_sold IS FALSE";
 				PreparedStatement stmt = conn.prepareStatement(query);
 				stmt.setInt(1, productId);
 				

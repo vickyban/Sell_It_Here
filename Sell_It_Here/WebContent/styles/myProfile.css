@@ -12,39 +12,110 @@ a {
 	color: black;
 }
 
+ 
 /* HEADER CODE*/
-#header {
-	padding-top: 10px;
-	height: 100px;
-	width: 100%;
-	border-bottom: 1px solid #dcdcdc;
+/* #header{
+  margin: 0;
+  padding: 2em 2em 0em 2em;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 10px;
+  height: 150px;
+  box-sizing: border-box;
+
+  background: white;
 }
 
-#header #logo_div {
-	height: 80px;
-	width: 70%;
-	margin: 0 auto;
+#header #logo_div{
+  display: relative;
+  height: 80px;
 }
 
-#logoLeft {
-	float: left;
-	height: 100%;
+#header #logo_div img{
+  height: 100%;
+} */
+/* ============== Search box ==================== */
+/* #header #search_div form{
+  display: grid;
+  grid-template-rows: 40px 40px;
+}
+------ box 1 ------
+#box1{
+  position: relative;
+  width: 100%;
+}
+#box1 input[type="text"]{
+  all:unset;
+  width: 80%;
+  padding: 5px 8px ;
+  font-size: 18px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: rgb(231, 230, 230);
+}
+#box1 input[type="submit"]{
+  all:unset;
+  width: 19%;
+  margin: 0;
+  padding: 5px ;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 15px;
+  color:white;
+  background: rgb(255, 63, 85);
+}
+ */
+/* ------ box 2 ------*/
+/* #search_div form{
+  margin: 0;
+}
+#header #search_div form #box2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 25px;
+}
+#box2 > div{
+  padding: 0 10px 0 10px;
+  box-sizing: border-box;
 }
 
-#logoRight {
-	float: right;
-	margin-top: 15px;
-	border: 2px solid rgb(255, 63, 85);
-	padding: 10px;
-	border-radius: 10px;
-	text-decoration: none;
-	color: rgb(255, 63, 85);
+#box2 > div > div {
+  font-size: 12px;
+}
+#header #search_div form #box2 #price {
+  display: relative;
+  width: 100%;
 }
 
-#logoRight:hover {
-	background: rgb(255, 63, 85);
-	color: aliceblue;
+#box2 select{
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border:none;
+  border-bottom: solid 2px black;
+  font-size: 15px;
 }
+#category{
+  position: relative;
+}
+
+.dropdown_div input{
+  all:unset;
+  width: 100%;
+  border-bottom: solid 2px black ;
+}
+#price{
+  border-left: 1px solid rgb(207, 205, 205);
+  border-right: 1px solid rgb(207, 205, 205);
+}
+
+#header #search_div #price .dropdown_div{
+  display: grid;
+  grid-template-columns: 1fr 15px 1fr;
+  grid-gap: 5px;
+  font-size: 15px;
+} */
 
 /* NAVBAR CODE */
 #navBar {
@@ -78,7 +149,7 @@ a {
 
 #center {
 	padding-top: 20px;
-	padding-left: 400px;
+	padding-left: 100px;
 }
 
 /* CONTENT CODE */
@@ -185,7 +256,7 @@ input:focus {
 	color: aliceblue;
 }
 
-/* */
+/* Footer Code */
 #footer {
 	margin-top: 100px;
 	width: 100%;
