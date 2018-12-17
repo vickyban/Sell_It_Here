@@ -5,53 +5,62 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Sell It Here</title>
+<link href="styles/headerStyle.css" rel="stylesheet" type="text/css" />
+<link href="styles/indexStyle.css" rel="stylesheet" type="text/css" />
+<link href="styles/footerStyle.css" rel="stylesheet" type="text/css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="styles/indexStyle.css" rel="stylesheet" type="text/css" />
-  <link href="styles/footerStyle.css" rel="stylesheet" type="text/css" />
-  <title>Sell It Here! - Home </title>
 </head>
 <body>
-	<div id="header" class="">
-	
-		<%@ include file="/login_out_div.jsp" %>
-		
-		
-		<img src=" Images/index_img_1.png" alt="cute_img" />
-		<h2 id="logo">Sell It Here!</h2>
+	<%@ include file="/header.jsp"%>
+
+	<div class="wrapper">
+		<section class="index-banner"> </section>
 	</div>
 
-	<div id="main" class="center">
+	<!-- <div id="main" class="center"> -->
+	<div class="wrapper">
 		<div id="categories">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/products?category=car">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=car">
 						<div class="icons"></div> Cars
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=electonic">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=electonic">
 						<div class="icons"></div> Electronics
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=fashion">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=fashion">
 						<div class="icons"></div> Fashion
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=home">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=home">
 						<div class="icons"></div> Home
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=garden">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=garden">
 						<div class="icons"></div> Garden
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=accessory">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=accessory">
 						<div class="icons"></div> Accessories
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=motor">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=motor">
 						<div class="icons"></div> Motors
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=sport">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=sport">
 						<div class="icons"></div> Sports
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=toy">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=toy">
 						<div class="icons"></div> Toys
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/products?category=other">
+				<li><a
+					href="${pageContext.request.contextPath}/products?category=other">
 						<div class="icons"></div> Others
 				</a></li>
 
@@ -59,66 +68,27 @@
 		</div>
 
 		<div id="recent_posts">
-			<h3>Recent Posting</h3>
+			<h3 style="font-family: 'Catamaran';">Recent Posting</h3>
 			<ul>
 				<c:forEach var="product" items="${products}">
-					<li class="item"><a href="${pageContext.request.contextPath}/products/product?id=${product.productId}">
+					<li class="item"><a
+						href="${pageContext.request.contextPath}/products/product?id=${product.productId}">
 							<div class="img">
 								<img
 									src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png">
 							</div>
-							<p class="item_price">$${product.price}</p>
 							<div class="item_name">${product.name}</div>
+							<div class="item_price">
+								<div>Price: $${product.price}</div>
+								<div>Seller: ${product.price}</div>
+							</div>
 					</a></li>
 
 				</c:forEach>
 			</ul>
-			<!-- <a href="Product?id=${item.id}" class="card">
-        <div>
-          <img src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png" />
-        </div>
-        <div>
-          <h3>${item.name}</h3>
-          <p>${item.price}</p>
-        </div>
-      </a> -->
-			<%-- <ul>
-				<li class="item"><a href="#">
-						<div class="img">
-							<img
-								src="https://res.cloudinary.com/goodsearch/image/upload/v1508942413/hi_resolution_merchant_logos/square_coupons.png">
-						</div>
-						<p class="item_price">${item.price}</p>
-						<div class="item_name">${item.name}</div>
-				</a></li>
-
-			</ul> --%>
-
 		</div>
 
 	</div>
 
-	<%@ include file="/footer_div.jsp" %>
-
-	<script>
-    let isOn = false;
-    let user_div = document.getElementById("user_div");
-    document.getElementById("toggle_btn").addEventListener("click", function(e){
-      if (isOn) {
-        user_div.style.display = 'none';
-        isOn = false;
-      } else {
-        user_div.style.display = 'block';
-        isOn = true;
-        e.stopPropagation();
-      }
-    })
-    document.addEventListener('click', function(e){
-      if (isOn) {
-        user_div.style.display = 'none';
-        isOn = false;
-      }
-    })
-  </script>
 </body>
 </html>
