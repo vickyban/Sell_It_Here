@@ -16,9 +16,11 @@
 <link
 	href="${pageContext.request.contextPath}/styles/transactionHistoryStyle.css"
 	rel="stylesheet" type="text/css" />
-	
-	<link
+
+<link
 	href="${pageContext.request.contextPath}/styles/userProfile_navStyle.css"
+	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/styles/footerStyle.css"
 	rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 </head>
@@ -90,10 +92,10 @@
 				</div>
 			</div>
 		</div>
+</div>
 
 
-
-
+		<%@ include file="/footer_div.jsp"%>
 		<script>
 			document.addEventListener("DOMContentLoaded", function(event) {
 

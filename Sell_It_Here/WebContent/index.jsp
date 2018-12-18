@@ -10,7 +10,7 @@
 <link href="styles/indexStyle.css" rel="stylesheet" type="text/css" />
 <link href="styles/footerStyle.css" rel="stylesheet" type="text/css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link href="${pageContext.request.contextPath}/styles/footerStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<%@ include file="/header.jsp"%>
@@ -89,6 +89,6 @@
 		</div>
 
 	</div>
-
+	<%@ include file="/footer_div.jsp"%>
 </body>
 </html>
