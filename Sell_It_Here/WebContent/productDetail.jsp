@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath}/styles/searchbarStyle.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/styles/productDetailStyle.css" rel="stylesheet"
 	type="text/css" />
+	  <link href="${pageContext.request.contextPath}/styles/footerStyle.css" rel="stylesheet" type="text/css" />
 <title>Product - ${product.name}</title>
 </head>
 <body>
@@ -58,5 +59,6 @@
 		</div>
 
 	</div>
+		<%@ include file="/footer_div.jsp"%>
 </body>
 </html>

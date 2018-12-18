@@ -18,6 +18,7 @@
 	rel="stylesheet" type="text/css" />
 
 <title><c:out value="${action}" default="Create new post" /></title>
+<link href="${pageContext.request.contextPath}/styles/footerStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<%@ include file="/searchbar.jsp"%>
@@ -94,5 +95,6 @@
 		</div>
 
 	</form>
+		<%@ include file="/footer_div.jsp"%>
 </body>
 </html>

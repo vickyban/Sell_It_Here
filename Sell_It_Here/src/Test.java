@@ -3,7 +3,6 @@ import java.util.Date;
 
 import dao.ProductDAO;
 import dao.UserDAO;
-import dao.UserDAO_OLD;
 import models.ProductBean;
 import models.UserBean;
 import util.HashPassword;

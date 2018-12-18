@@ -13,12 +13,12 @@
 		<div class="floatRight2">
 			<table>
 				<tr>
-					<td><img src="Images/fb.svg" class="footLogo"></td>
-					<td><img src="Images/gmail.svg" class="footLogo"></td>
-					<td><img src="Images/instag.svg" class="footLogo"></td>
-					<td><img src="Images/twitter.svg" class="footLogo"></td>
-					<td><img src="Images/yt.svg" class="footLogo"></td>
-					<td><img src="Images/pin.svg" class="footLogo"></td>
+					<td><img src="${pageContext.request.contextPath}/Images/fb.svg" class="footLogo"></td>
+					<td><img src="${pageContext.request.contextPath}/Images/gmail.svg" class="footLogo"></td>
+					<td><img src="${pageContext.request.contextPath}/Images/instag.svg" class="footLogo"></td>
+					<td><img src="${pageContext.request.contextPath}/Images/twitter.svg" class="footLogo"></td>
+					<td><img src="${pageContext.request.contextPath}/Images/yt.svg" class="footLogo"></td>
+					<td><img src="${pageContext.request.contextPath}/Images/pin.svg" class="footLogo"></td>
 				</tr>
 			</table>
 		</div>
