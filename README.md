@@ -76,91 +76,65 @@ Search bar is not located in homepage anymore. On our homepage, the users will s
 
 1. **Home Page**
 ![](./md_img/home1.png)
-|
+Contain link to Sign in/Signup Page. List of products categories the users can look up. List of 10 most recent products put up for sale
+
 ![](./md_img/home2.png)
+When a user log ins, the nav displays link to the user profile, a link to create posts to sell product, and to sign out
 
 
- | Contain link to Sign in/Signup Page         List of products categories the users can look up   List of 10 most recent products put up for sale     |
-| --- | --- |
-|
- =
- | When a user log ins, the nav displays link to the user profile, a link to create posts to sell product, and to sign out |
+2. **Sign in/Sign up Page**
 
-
-
-1. **Sign in/Sign up Page**
 ![](./md_img/register.png)
+the user gets accessed to this page by clicking on &quot;Sign in/Sign up&quot; at the top right of the page,  Use the left form to create new account and right form to sign in for an existing account
 
 
- |   the user gets accessed to this page by clicking on &quot;Sign in/Sign up&quot; at the top right of the page,  Use the left form to create new account and right form to sign in for an existing account |
-| --- | --- |
+3. **Product List Page**
 
-1. **Product List Page**
 ![](./md_img/products.png)
-|
-
- |  Search bar allow to look for a specific type of item based on keywork, categories, price range, as well as how to sort the items      Select one of the products to view them in detail |
-| --- | --- |
-
-1. **Product Detail Page**
-
-|![](./md_img/product1.png)
-
- | This is the view of the user who is not the seller of this product In this page, the user gets more information about the product like product description, seller name and the location he lives   The user can also send a message to the seller for any addition query about the product  |
-| --- | --- |
-|![](./md_img/product2.png)
-
- | If the seller views his own product, he will have access to edit the product or take down the post if the product has not yet been sold |
+Search bar allow to look for a specific type of item based on keywork, categories, price range, as well as how to sort the items      Select one of the products to view them in detail
 
 
+4. **Product Detail Page**
+
+![](./md_img/product1.png)
+ | This is the view of the user who is not the seller of this product In this page, the user gets more information about the product like product description, seller name and the location he lives   The user can also send a message to the seller for any addition query about the product
+
+![](./md_img/product2.png)
+If the seller views his own product, he will have access to edit the product or take down the post if the product has not yet been sold
 
 
+5. **Buy Product Page**
 
-1. **Buy Product Page**
-
-|![](./md_img/buy.png)
-
- | After a user clicked on &quot;Buy&quot; in the product detail page, if he hasn&#39;t logged in, he will be redirected to sign in page before he can process further. Else it will take him to this page to make confirmation about this purchase Click &quot;Pay&quot; to process with the purchaseClick &quot;Cancel&quot; to abort the transaction   |
-| --- | --- |
-
-1. **Sell Product Page**
-
-|![](./md_img/sell.png)
-
- | When a logged in user clicks on &quot;Sell Item&quot;, it will get him to this page where he can enter information about the product, he wants to sell      Click cancel if the user decides not to create the post |
-| --- | --- |
-
-1. **Edit Product Page**
-
-|![](./md_img/edit_prod.png)
- | After created a post, the seller can edit his posts by clicking on Edit link in the product detail and that will transfer him to this page where he can modify the product information    The user can also delete the post if he wants to  |
-| --- | --- |
-
-1. **User Profile Page**
-
-|![](./md_img/edit_prof.png)
-
- |   This sub navbar contains links to the website home page, the user profile, transaction history and message history    when a logged in user clicks on his name in the top right navbar of the page, he gets transfer to his profile page where he can view the information he entered and edit them. |
-| --- | --- |
+![](./md_img/buy.png)
+After a user clicked on &quot;Buy&quot; in the product detail page, if he hasn&#39;t logged in, he will be redirected to sign in page before he can process further. Else it will take him to this page to make confirmation about this purchase Click &quot;Pay&quot; to process with the purchaseClick &quot;Cancel&quot; to abort the transaction
 
 
+6. **Sell Product Page**
 
-1. **Transaction History Page**
-
-|![](./md_img/history1.png)
-
- |   When the logged in user click on &quot;Transaction&quot; in the sub nav, he can view what he has sold or buy |
-| --- | --- |
-|![](./md_img/history2.png)
-
- |      Click &quot;Sales&quot; to view products he has sold Click &quot;Purchases&quot; to view products he has bought     |
+![](./md_img/sell.png)
+When a logged in user clicks on &quot;Sell Item&quot;, it will get him to this page where he can enter information about the product, he wants to sell      Click cancel if the user decides not to create the post
 
 
+7. **Edit Product Page**
+
+![](./md_img/edit_prod.png)
+After created a post, the seller can edit his posts by clicking on Edit link in the product detail and that will transfer him to this page where he can modify the product information    The user can also delete the post if he wants to
 
 
+8. **User Profile Page**
+
+![](./md_img/edit_prof.png)
+
+This sub navbar contains links to the website home page, the user profile, transaction history and message history    when a logged in user clicks on his name in the top right navbar of the page, he gets transfer to his profile page where he can view the information he entered and edit them.
 
 
+9. **Transaction History Page**
 
+![](./md_img/history1.png)
+When the logged in user click on &quot;Transaction&quot; in the sub nav, he can view what he has sold or buy
+
+![](./md_img/history2.png)
+Click &quot;Sales&quot; to view products he has sold Click &quot;Purchases&quot; to view products he has bought
 
 
 1. **Message History Page**
